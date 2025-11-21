@@ -61,105 +61,6 @@
         </button>
       </div>
     </section>
-
-        <!-- 관리자 대시보드 섹션 -->
-    <section class="dashboard-section" id="admin-dashboard">
-      <div class="dashboard-inner">
-        <header class="dashboard-header">
-          <h2 class="dashboard-title">관리자 대시보드</h2>
-          <p class="dashboard-subtitle">
-            방문 통계와 유물·콘텐츠 반응을 한 눈에 확인할 수 있는 영역입니다.
-          </p>
-        </header>
-
-        <!-- 상단: 방문자/성별/연령 요약 -->
-        <div class="dashboard-top">
-          <div class="stat-grid">
-            <div class="stat-card">
-              <span class="stat-label">총 방문자</span>
-              <span class="stat-value" id="stat-total-visitors">0</span>
-            </div>
-            <div class="stat-card">
-              <span class="stat-label">오늘 방문자</span>
-              <span class="stat-value" id="stat-today-visitors">0</span>
-            </div>
-            <div class="stat-card">
-              <span class="stat-label">총 찜 수</span>
-              <span class="stat-value" id="stat-total-likes">0</span>
-            </div>
-            <div class="stat-card">
-              <span class="stat-label">총 클릭 수</span>
-              <span class="stat-value" id="stat-total-clicks">0</span>
-            </div>
-          </div>
-
-          <div class="chart-card">
-            <h3 class="chart-title">성별 · 연령별 비율</h3>
-            <!-- 나중에 라이브러리(Chart.js 등)로 그릴 캔버스 -->
-            <div class="chart-placeholder">
-              <canvas id="chart-demographics"></canvas>
-            </div>
-          </div>
-        </div>
-
-        <!-- 중단: 유물 TOP10 -->
-        <div class="dashboard-row">
-          <div class="chart-card">
-            <h3 class="chart-title">가장 많이 클릭된 유물 TOP 10</h3>
-            <div class="chart-placeholder">
-              <canvas id="chart-artifact-clicks"></canvas>
-            </div>
-          </div>
-
-          <div class="chart-card">
-            <h3 class="chart-title">하트가 가장 많이 눌린 유물 TOP 10</h3>
-            <div class="chart-placeholder">
-              <canvas id="chart-artifact-likes"></canvas>
-            </div>
-          </div>
-        </div>
-
-        <!-- 중단: 콘텐츠 TOP10 -->
-        <div class="dashboard-row">
-          <div class="chart-card">
-            <h3 class="chart-title">가장 많이 클릭된 콘텐츠 TOP 10</h3>
-            <div class="chart-placeholder">
-              <canvas id="chart-content-clicks"></canvas>
-            </div>
-          </div>
-
-          <div class="chart-card">
-            <h3 class="chart-title">하트가 가장 많이 눌린 콘텐츠 TOP 10</h3>
-            <div class="chart-placeholder">
-              <canvas id="chart-content-likes"></canvas>
-            </div>
-          </div>
-        </div>
-
-        <!-- 하단: 태그/키워드 워드클라우드 -->
-        <div class="dashboard-row dashboard-row--wordcloud">
-          <div class="chart-card">
-            <h3 class="chart-title">유물 태그 워드클라우드</h3>
-            <div class="wordcloud-placeholder" id="wordcloud-artifacts">
-              <!-- 여기 안을 나중에 워드클라우드 라이브러리로 렌더링 -->
-            </div>
-          </div>
-
-          <div class="chart-card">
-            <h3 class="chart-title">콘텐츠 키워드 워드클라우드</h3>
-            <div class="wordcloud-placeholder" id="wordcloud-contents">
-              <!-- 여기 안을 나중에 워드클라우드 라이브러리로 렌더링 -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer>
-    뮤즈티브와 함께 펼쳐나갈 당신의 세계를 기대합니다
-  </footer>
 <!-- 관리자 대시보드 섹션 -->
 <section class="dashboard-section">
   <div class="dashboard-inner">
@@ -244,6 +145,13 @@
     </div>
   </div>
 </section>
+     
+  </main>
+
+  <footer>
+    뮤즈티브와 함께 펼쳐나갈 당신의 세계를 기대합니다
+  </footer>
+
 
   <!-- 간단한 인터랙션 스크립트 -->
   <script>
@@ -429,6 +337,7 @@
 
 </body>
 </html>
+
 
 
 
