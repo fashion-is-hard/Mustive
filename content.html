@@ -5,6 +5,7 @@
   <title>MuseTiv – 콘텐츠 상세</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
+  <script src="artifacts-data.js"></script>
 </head>
 <body>
   <header>
@@ -56,31 +57,33 @@
       </div>
     </section>
 
-    <!-- 관련 유물 (지금은 더미) -->
-    <section class="carousel-section artifact-section">
-      <div class="carousel-header">
-        <h2 class="carousel-title">콘텐츠와 유사한 유물</h2>
-        <p class="carousel-subtitle">
-          콘텐츠의 세계관과 이어지는 전국 박물관의 유물을 둘러보세요!
-        </p>
-      </div>
+    <!-- 콘텐츠와 연결된 유물 -->
+<section class="carousel-section artifact-section">
+  <div class="carousel-header">
+    <h2 class="carousel-title">콘텐츠와 연결된 유물</h2>
+    <p class="carousel-subtitle">
+      이 콘텐츠의 시대와 세계관을 함께 보여주는 국립중앙박물관의 유물입니다.
+    </p>
+  </div>
 
-      <div class="carousel-shell">
-        <button class="carousel-arrow carousel-arrow--left"
-                data-target="detail-artifact-row" aria-label="이전 유물">
-          &#10094;
-        </button>
+  <div class="carousel-shell">
+    <button class="carousel-arrow carousel-arrow--left"
+            data-target="artifact-row"
+            aria-label="이전 유물">
+      &#10094;
+    </button>
 
-        <div class="carousel-row" id="detail-artifact-row">
-          <!-- 나중에 국중박 JSON과 연결 -->
-        </div>
+    <!-- 여기 안을 JS로 채울 거야 -->
+    <div class="carousel-row" id="artifact-row"></div>
 
-        <button class="carousel-arrow carousel-arrow--right"
-                data-target="detail-artifact-row" aria-label="다음 유물">
-          &#10095;
-        </button>
-      </div>
-    </section>
+    <button class="carousel-arrow carousel-arrow--right"
+            data-target="artifact-row"
+            aria-label="다음 유물">
+      &#10095;
+    </button>
+  </div>
+</section>
+
 
     <!-- 추천 콘텐츠 -->
     <section class="carousel-section ott-section">
@@ -292,86 +295,71 @@
       });
     }
 
-    // 임시 유물 카드 (API 준비되면 교체)
-    function renderDummyArtifacts() {
-      const row = document.getElementById("detail-artifact-row");
-      if (!row) return;
-      row.innerHTML = "";
+   // ---------- ① 유물 카드 채우기 ----------
 
-      for (let i = 1; i <= 5; i++) {
-        const article = document.createElement("article");
-        article.className = "media-card media-card--horizontal";
+  (function renderArtifactsForContent() {
+    const row = document.getElementById('artifact-row');
+    if (!row || typeof artifactsDataset === 'undefined') return;
 
-        const inner = document.createElement("div");
-        inner.className = "media-card-inner";
+    // 이 콘텐츠와 관련된 유물 5개 정도만 보여준다는 가정
+    const selected = artifactsDataset.slice(0, 5);
 
-        const img = document.createElement("img");
-        img.className = "media-image";
-        img.alt = "유물 이미지";
-        img.src = "img/artifact_placeholder.jpg";
+    selected.forEach(function (a) {
+      const article = document.createElement('article');
+      article.className = 'media-card media-card--horizontal';
 
-        const gradient = document.createElement("div");
-        gradient.className = "media-gradient";
+      const inner = document.createElement('div');
+      inner.className = 'media-card-inner';
 
-        const title = document.createElement("div");
-        title.className = "media-title";
-        title.textContent = "연관 유물 " + i;
+      // 카드 전체 클릭 시 박물관 유물 페이지 새 창 열기
+      article.addEventListener('click', function () {
+        window.open(a.museumUrl, '_blank', 'noopener');
+      });
 
-        inner.appendChild(img);
-        inner.appendChild(gradient);
-        inner.appendChild(title);
-        article.appendChild(inner);
+      // 유물 이미지
+      const img = document.createElement('img');
+      img.className = 'media-image';
+      img.src = a.image;
+      img.alt = a.name;
 
-        row.appendChild(article);
-      }
-    }
+      // 하트 버튼
+      const heartBtn = document.createElement('button');
+      heartBtn.className = 'heart-btn';
+      heartBtn.type = 'button';
+      heartBtn.setAttribute('aria-label', '유물 찜하기');
 
-    document.addEventListener("DOMContentLoaded", function () {
-      console.log("content.html DOM loaded");
-      attachCarouselArrows();
-      renderDummyArtifacts();
+      const heartSpan = document.createElement('span');
+      heartSpan.className = 'heart-shape';
+      heartSpan.textContent = '♥';
+      heartBtn.appendChild(heartSpan);
 
-      const params = getQueryParams();
-      const targetId = params.id ? params.id : null;
-      console.log("query id =", targetId);
+      // 아래 그라디언트 + 유물 이름
+      const gradient = document.createElement('div');
+      gradient.className = 'media-gradient';
 
-      // TMDB JSON 로드
-      fetch(TMDB_JSON_PATH)
-        .then(function (res) {
-          console.log("JSON fetch status", res.status);
-          if (!res.ok) throw new Error("JSON 로딩 실패: " + res.status);
-          return res.json();
-        })
-        .then(function (items) {
-          console.log("JSON items length:", items.length);
-          if (!Array.isArray(items) || items.length === 0) {
-            throw new Error("JSON에 아이템이 없습니다.");
-          }
+      const title = document.createElement('div');
+      title.className = 'media-title';
+      title.textContent = a.name;
 
-          let current = null;
-          if (targetId !== null) {
-            current = items.find(
-              (it) => String(it.id) === String(targetId)
-            );
-          }
-          if (!current) {
-            console.warn("해당 id를 찾지 못해 첫 번째 항목으로 대체합니다.");
-            current = items[0];
-          }
+      inner.appendChild(img);
+      inner.appendChild(heartBtn);
+      inner.appendChild(gradient);
+      inner.appendChild(title);
+      article.appendChild(inner);
+      row.appendChild(article);
 
-          fillDetail(current);
-          renderRecommendations(items, current.id);
-        })
-        .catch(function (err) {
-          console.error(err);
-          const overviewEl = document.getElementById("detail-overview");
-          if (overviewEl) {
-            overviewEl.textContent =
-              "콘텐츠 정보를 불러오는 데 문제가 발생했습니다.";
-          }
-        });
+      // 하트 토글 이벤트 (카드 클릭과 분리)
+      heartBtn.addEventListener('click', function (event) {
+        event.stopPropagation();
+        heartBtn.classList.toggle('liked');
+      });
     });
+  })();
+
+  // 만약 페이지에 다른 하트 버튼들도 있다면 한 번 더 초기화
+  initHeartButtons(document);
   </script>
 </body>
 </html>
+
 
