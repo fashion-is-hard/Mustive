@@ -16,41 +16,27 @@
   </header>
 
   <main>
-    <!-- 히어로 영역: 백드롭 이미지 + 페이드 -->
     <section class="hero-video hero-detail">
       <div class="hero-video-wrapper hero-detail-wrapper">
         <div class="hero-detail-backdrop" id="detail-backdrop"></div>
-
         <div class="hero-gradient hero-gradient--top"></div>
         <div class="hero-gradient hero-gradient--bottom"></div>
-
         <div class="hero-overlay-content hero-detail-overlay">
           <h1 id="detail-title" class="hero-detail-title">콘텐츠 제목</h1>
-          <p id="detail-meta" class="hero-detail-meta">
-            연도 · 장르 · 평점
-          </p>
+          <p id="detail-meta" class="hero-detail-meta">연도 · 장르 · 평점</p>
         </div>
       </div>
     </section>
 
-    <!-- 콘텐츠 정보 섹션 -->
     <section class="detail-section">
       <div class="detail-inner">
         <div class="detail-main">
           <h2 class="detail-heading">콘텐츠 정보</h2>
-          <p id="detail-overview" class="detail-overview">
-            줄거리가 여기에 들어갑니다.
-          </p>
-           <a id="tving-watch-btn"
-             class="btn-watch-tving"
-             href="https://www.tving.com/"
-             target="_blank"
-             rel="noopener noreferrer">
-            티빙에서 바로 시청하기
-          </a>
-          <div id="detail-tags" class="detail-tags">
-            <!-- 태그 배지들 -->
-          </div>
+          <p id="detail-overview" class="detail-overview">줄거리가 여기에 들어갑니다.</p>
+
+          <a id="tving-watch-btn" class="btn-watch-tving" href="https://www.tving.com/" target="_blank" rel="noopener noreferrer">티빙에서 바로 시청하기</a>
+
+          <div id="detail-tags" class="detail-tags"></div>
         </div>
 
         <aside class="detail-side">
@@ -59,315 +45,188 @@
       </div>
     </section>
 
-    <!-- 관련 유물 섹션 (지금은 더미 데이터 기반, 나중에 국중박 JSON 연결) -->
     <section class="carousel-section artifact-section">
       <div class="carousel-header">
         <h2 class="carousel-title">이 장면과 닿아 있는 유물</h2>
-        <p class="carousel-subtitle">
-          콘텐츠의 세계관과 이어지는 국립중앙박물관의 유물을 둘러보세요.
-        </p>
+        <p class="carousel-subtitle">콘텐츠의 세계관과 이어지는 국립중앙박물관의 유물을 둘러보세요.</p>
       </div>
 
       <div class="carousel-shell">
-        <button class="carousel-arrow carousel-arrow--left"
-                data-target="detail-artifact-row" aria-label="이전 유물">
-          &#10094;
-        </button>
-
-        <div class="carousel-row" id="detail-artifact-row">
-          <!-- 나중에 JSON/연결 로직으로 채움 -->
-        </div>
-
-        <button class="carousel-arrow carousel-arrow--right"
-                data-target="detail-artifact-row" aria-label="다음 유물">
-          &#10095;
-        </button>
+        <button class="carousel-arrow carousel-arrow--left" data-target="detail-artifact-row" aria-label="이전 유물">&#10094;</button>
+        <div class="carousel-row" id="detail-artifact-row"></div>
+        <button class="carousel-arrow carousel-arrow--right" data-target="detail-artifact-row" aria-label="다음 유물">&#10095;</button>
       </div>
     </section>
 
-    <!-- 추천 콘텐츠 섹션 -->
     <section class="carousel-section ott-section">
       <div class="carousel-header">
         <h2 class="carousel-title">이런 콘텐츠는 어떠세요?</h2>
-        <p class="carousel-subtitle">
-          지금 작품과 분위기가 닮은 다른 콘텐츠를 함께 감상해보세요.
-        </p>
+        <p class="carousel-subtitle">지금 작품과 분위기가 닮은 다른 콘텐츠를 함께 감상해보세요.</p>
       </div>
 
       <div class="carousel-shell">
-        <button class="carousel-arrow carousel-arrow--left"
-                data-target="detail-reco-row" aria-label="이전 콘텐츠">
-          &#10094;
-        </button>
-
-        <div class="carousel-row" id="detail-reco-row">
-          <!-- JSON 기반 추천 카드 -->
-        </div>
-
-        <button class="carousel-arrow carousel-arrow--right"
-                data-target="detail-reco-row" aria-label="다음 콘텐츠">
-          &#10095;
-        </button>
+        <button class="carousel-arrow carousel-arrow--left" data-target="detail-reco-row" aria-label="이전 콘텐츠">&#10094;</button>
+        <div class="carousel-row" id="detail-reco-row"></div>
+        <button class="carousel-arrow carousel-arrow--right" data-target="detail-reco-row" aria-label="다음 콘텐츠">&#10095;</button>
       </div>
     </section>
   </main>
 
-  <footer>
-    뮤즈티브와 함께 펼쳐나갈 당신의 세계를 기대합니다
-  </footer>
+  <footer>뮤즈티브와 함께 펼쳐나갈 당신의 세계를 기대합니다</footer>
 
- <script>
-  const TMDB_POSTER_BASE = "https://image.tmdb.org/t/p/w300";
-  const TMDB_BACKDROP_BASE = "https://image.tmdb.org/t/p/w780";
-  const TMDB_JSON_PATH = "data/musetiv_tving_historical_20_by_title.json"; // 위치에 따라 수정
+  <script>
+    const TMDB_POSTER_BASE = "https://image.tmdb.org/t/p/w300";
+    const TMDB_BACKDROP_BASE = "https://image.tmdb.org/t/p/w780";
+    const TMDB_JSON_PATH = "/musetiv_tving_historical_20_by_title.json";
 
-  function getTitle(item) {
-    return (
-      item.name ||
-      item.title ||
-      item.original_name ||
-      item.original_title ||
-      "제목 미정"
-    );
-  }
+    function getTitle(item) {
+      return item.name || item.title || item.original_name || item.original_title || "제목 미정";
+    }
 
-  // 쿼리 파라미터 파싱
-  function getQueryParams() {
-    const params = {};
-    const search = window.location.search.substring(1);
-    if (!search) return params;
-    search.split("&").forEach(function (pair) {
-      const [k, v] = pair.split("=");
-      if (!k) return;
-      params[decodeURIComponent(k)] = decodeURIComponent(v || "");
-    });
-    return params;
-  }
+    function getQueryParams() {
+      const params = {};
+      const search = window.location.search.substring(1);
+      if (!search) return params;
+      search.split("&").forEach(function (pair) {
+        const [k, v] = pair.split("=");
+        if (!k) return;
+        params[decodeURIComponent(k)] = decodeURIComponent(v || "");
+      });
+      return params;
+    }
 
-  function attachCarouselArrows() {
-    document.querySelectorAll('.carousel-arrow').forEach(function (arrow) {
-      arrow.addEventListener('click', function () {
-        const targetId = arrow.getAttribute('data-target');
-        const row = document.getElementById(targetId);
-        if (!row) return;
-
-        const direction = arrow.classList.contains('carousel-arrow--left') ? -1 : 1;
-        const scrollAmount = row.clientWidth * 0.8;
-
-        row.scrollBy({
-          left: direction * scrollAmount,
-          behavior: 'smooth'
+    function attachCarouselArrows() {
+      document.querySelectorAll('.carousel-arrow').forEach(function (arrow) {
+        arrow.addEventListener('click', function () {
+          const targetId = arrow.getAttribute('data-target');
+          const row = document.getElementById(targetId);
+          if (!row) return;
+          const direction = arrow.classList.contains('carousel-arrow--left') ? -1 : 1;
+          const scrollAmount = row.clientWidth * 0.8;
+          row.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
         });
       });
-    });
-  }
-
-  // 메인 상세 정보 채우기 + 티빙 버튼 링크 설정
-  function fillDetail(item) {
-    const titleEl = document.getElementById('detail-title');
-    const metaEl = document.getElementById('detail-meta');
-    const overviewEl = document.getElementById('detail-overview');
-    const posterEl = document.getElementById('detail-poster');
-    const tagsEl = document.getElementById('detail-tags');
-    const backdropEl = document.getElementById('detail-backdrop');
-    const watchBtn = document.getElementById('tving-watch-btn');
-
-    const title = getTitle(item);
-    titleEl.textContent = title;
-
-    // 메타 정보
-    const date = item.first_air_date || item.release_date || "";
-    const year = date ? date.slice(0, 4) : "";
-    const rating = typeof item.vote_average === "number"
-      ? item.vote_average.toFixed(1)
-      : "–";
-
-    let genresText = "";
-    if (Array.isArray(item.genres) && item.genres.length > 0) {
-      genresText = item.genres.map(g => g.name).join(", ");
     }
 
-    metaEl.textContent = [year, genresText, `평점 ${rating}`]
-      .filter(Boolean)
-      .join(" · ");
+    function fillDetail(item) {
+      const titleEl = document.getElementById('detail-title');
+      const metaEl = document.getElementById('detail-meta');
+      const overviewEl = document.getElementById('detail-overview');
+      const posterEl = document.getElementById('detail-poster');
+      const tagsEl = document.getElementById('detail-tags');
+      const backdropEl = document.getElementById('detail-backdrop');
+      const watchBtn = document.getElementById('tving-watch-btn');
 
-    overviewEl.textContent = item.overview || "줄거리 정보가 없습니다.";
+      const title = getTitle(item);
+      titleEl.textContent = title;
 
-    // 포스터
-    if (item.poster_path) {
-      posterEl.src = TMDB_POSTER_BASE + item.poster_path;
-    } else {
-      posterEl.src = "img/poster_placeholder.jpg";
-    }
-    posterEl.alt = title;
+      const date = item.first_air_date || item.release_date || "";
+      const year = date ? date.slice(0, 4) : "";
+      const rating = typeof item.vote_average === "number" ? item.vote_average.toFixed(1) : "–";
 
-    // 태그
-    tagsEl.innerHTML = "";
-    if (genresText) {
-      genresText.split(",").forEach(function (g) {
+      let genresText = "";
+      if (Array.isArray(item.genres) && item.genres.length > 0) {
+        genresText = item.genres.map(g => g.name).join(", ");
+      }
+
+      metaEl.textContent = [year, genresText, `평점 ${rating}`].filter(Boolean).join(" · ");
+      overviewEl.textContent = item.overview || "줄거리 정보가 없습니다.";
+
+      posterEl.src = item.poster_path ? TMDB_POSTER_BASE + item.poster_path : "img/poster_placeholder.jpg";
+
+      tagsEl.innerHTML = "";
+      if (genresText) {
+        genresText.split(",").forEach(function (g) {
+          const span = document.createElement('span');
+          span.className = 'tag-chip';
+          span.textContent = g.trim();
+          tagsEl.appendChild(span);
+        });
+      }
+
+      if (item.original_name || item.original_title) {
         const span = document.createElement('span');
-        span.className = 'tag-chip';
-        span.textContent = g.trim();
+        span.className = 'tag-chip tag-chip--sub';
+        span.textContent = "원제: " + (item.original_name || item.original_title);
         tagsEl.appendChild(span);
-      });
-    }
-    if (item.original_name || item.original_title) {
-      const span = document.createElement('span');
-      span.className = 'tag-chip tag-chip--sub';
-      span.textContent = "원제: " + (item.original_name || item.original_title);
-      tagsEl.appendChild(span);
-    }
+      }
 
-    // 백드롭
-    if (item.backdrop_path) {
-      backdropEl.style.backgroundImage = `url(${TMDB_BACKDROP_BASE + item.backdrop_path})`;
-    } else if (item.poster_path) {
-      backdropEl.style.backgroundImage = `url(${TMDB_POSTER_BASE + item.poster_path})`;
-    } else {
-      backdropEl.style.backgroundColor = "#333f50";
+      if (item.backdrop_path) {
+        backdropEl.style.backgroundImage = `url(${TMDB_BACKDROP_BASE + item.backdrop_path})`;
+      } else if (item.poster_path) {
+        backdropEl.style.backgroundImage = `url(${TMDB_POSTER_BASE + item.poster_path})`;
+      } else {
+        backdropEl.style.backgroundColor = "#333f50";
+      }
+
+      if (watchBtn) {
+        const query = encodeURIComponent(title);
+        watchBtn.href = `https://www.tving.com/search?keyword=${query}`;
+      }
     }
 
-    // ✅ 티빙 바로 시청 버튼 링크 설정
-    if (watchBtn) {
-      const query = encodeURIComponent(title);
-      // 검색 페이지로 보내는 형태 (실제 상영 여부와 무관하게)
-      watchBtn.href = `https://www.tving.com/search?keyword=${query}`;
-    }
-  }
-
-  // 추천 카드 생성
-  function createRecoCard(item) {
-    const article = document.createElement('article');
-    article.className = 'media-card media-card--vertical';
-    if (item.id) article.dataset.tmdbId = item.id;
-    if (item.kind) article.dataset.kind = item.kind;
-
-    const inner = document.createElement('div');
-    inner.className = 'media-card-inner';
-
-    const img = document.createElement('img');
-    img.className = 'media-image';
-    img.alt = getTitle(item);
-    if (item.poster_path) {
-      img.src = TMDB_POSTER_BASE + item.poster_path;
-    } else {
-      img.src = "img/poster_placeholder.jpg";
-    }
-
-    const gradient = document.createElement('div');
-    gradient.className = 'media-gradient';
-
-    const title = document.createElement('div');
-    title.className = 'media-title';
-    title.textContent = getTitle(item);
-
-    inner.appendChild(img);
-    inner.appendChild(gradient);
-    inner.appendChild(title);
-    article.appendChild(inner);
-
-    article.addEventListener('click', function () {
-      const id = item.id;
-      const kind = item.kind || 'tv';
-      if (!id) return;
-      window.location.href =
-        `content.html?id=${encodeURIComponent(id)}&kind=${encodeURIComponent(kind)}`;
-    });
-
-    return article;
-  }
-
-  function renderRecommendations(allItems, currentId) {
-    const row = document.getElementById('detail-reco-row');
-    if (!row) return;
-    row.innerHTML = "";
-
-    const candidates = allItems
-      .filter(it => String(it.id) !== String(currentId))
-      .slice(0, 10);
-
-    candidates.forEach(function (item) {
-      const card = createRecoCard(item);
-      row.appendChild(card);
-    });
-  }
-
-  // 임시 유물 카드 (API 준비되면 교체)
-  function renderDummyArtifacts() {
-    const row = document.getElementById('detail-artifact-row');
-    if (!row) return;
-    row.innerHTML = "";
-
-    for (let i = 1; i <= 5; i++) {
+    function createRecoCard(item) {
       const article = document.createElement('article');
-      article.className = 'media-card media-card--horizontal';
+      article.className = 'media-card media-card--vertical';
+      if (item.id) article.dataset.tmdbId = item.id;
 
       const inner = document.createElement('div');
       inner.className = 'media-card-inner';
 
       const img = document.createElement('img');
       img.className = 'media-image';
-      img.alt = '유물 이미지';
-      img.src = 'img/artifact_placeholder.jpg';
+      img.alt = getTitle(item);
+      img.src = item.poster_path ? TMDB_POSTER_BASE + item.poster_path : "img/poster_placeholder.jpg";
 
       const gradient = document.createElement('div');
       gradient.className = 'media-gradient';
 
       const title = document.createElement('div');
       title.className = 'media-title';
-      title.textContent = '연관 유물 ' + i;
+      title.textContent = getTitle(item);
 
       inner.appendChild(img);
       inner.appendChild(gradient);
       inner.appendChild(title);
       article.appendChild(inner);
 
-      row.appendChild(article);
-    }
-  }
-
-  document.addEventListener('DOMContentLoaded', function () {
-    attachCarouselArrows();
-    renderDummyArtifacts();
-
-    const params = getQueryParams();
-    const targetId = params.id ? params.id : null; // 문자열 그대로
-
-    fetch(TMDB_JSON_PATH)
-      .then(function (res) {
-        if (!res.ok) throw new Error('JSON 로딩 실패: ' + res.status);
-        return res.json();
-      })
-      .then(function (items) {
-        console.log("TMDB JSON loaded:", items);
-        if (!Array.isArray(items) || items.length === 0) {
-          throw new Error("JSON 안에 아이템이 없습니다.");
-        }
-
-        // 문자열 기반으로 id 매칭 (숫자/문자 혼합 대비)
-        let current = null;
-        if (targetId !== null) {
-          current = items.find(it => String(it.id) === String(targetId));
-        }
-        if (!current) {
-          console.warn("해당 id를 찾지 못해 첫 번째 작품으로 대체합니다.");
-          current = items[0];
-        }
-
-        fillDetail(current);
-        renderRecommendations(items, current.id);
-      })
-      .catch(function (err) {
-        console.error(err);
-        document.getElementById('detail-overview').textContent =
-          '콘텐츠 정보를 불러오는 데 문제가 발생했습니다.';
+      article.addEventListener('click', function () {
+        const id = item.id;
+        window.location.href = `content.html?id=${encodeURIComponent(id)}`;
       });
-  });
-</script>
-</body>
-</html>
 
-</body>
-</html>
+      return article;
+    }
 
+    function renderRecommendations(allItems, currentId) {
+      const row = document.getElementById('detail-reco-row');
+      if (!row) return;
+      row.innerHTML = "";
 
+      const candidates = allItems.filter(it => String(it.id) !== String(currentId)).slice(0, 10);
+      candidates.forEach(function (item) {
+        row.appendChild(createRecoCard(item));
+      });
+    }
+
+    function renderDummyArtifacts() {
+      const row = document.getElementById('detail-artifact-row');
+      if (!row) return;
+      row.innerHTML = "";
+
+      for (let i = 1; i <= 5; i++) {
+        const article = document.createElement('article');
+        article.className = 'media-card media-card--horizontal';
+
+        const inner = document.createElement('div');
+        inner.className = 'media-card-inner';
+
+        const img = document.createElement('img');
+        img.className = 'media-image';
+        img.alt = '유물 이미지';
+        img.src = 'img/artifact_placeholder.jpg';
+
+        const gradient = document.createElement('div');
+        gradient.className = 'media-gradient';
+
+        const title = document.createElement('div');
