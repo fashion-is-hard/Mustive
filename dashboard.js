@@ -66,68 +66,99 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /* ---------- 방문자 성별/연령 차트 ---------- */
-  const visitorsCanvas = document.getElementById("chartVisitors");
-  if (visitorsCanvas) {
-    const gender = data.visitorsByGender;
-    const age = data.visitorsByAge;
-
-    new Chart(visitorsCanvas.getContext("2d"), {
-      type: "bar",
-      data: {
-        labels: age.map(a => a.label),
-        datasets: [
-          {
-            label: "연령 비율(%)",
-            data: age.map(a => a.value)
-          }
-        ]
-      },
-      options: makeBaseOptions({
-        plugins: {
-          title: {
-            display: true,
-            text: `성별 비율  ·  여성 ${gender.female}%  ·  남성 ${gender.male}%  ·  기타 ${gender.other}%`
-          }
+ const visitorsCanvas = document.getElementById("chartVisitors");
+if (visitorsCanvas) {
+  new Chart(visitorsCanvas.getContext("2d"), {
+    type: "bar",
+    data: {
+      labels: data.visitorsByAge.map(a => a.label),
+      datasets: [{
+        label: "연령 비율(%)",
+        data: data.visitorsByAge.map(a => a.value),
+        backgroundColor: "rgba(242, 76, 100, 0.7)"
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          labels: { color: "#f2f2f2" }
         },
-        scales: {
-          y: {
-            beginAtZero: true,
-            max: 40
-          }
+        title: {
+          display: true,
+          text: "연령대별 방문자 비율",
+          color: "#f2f2f2"
         }
-      })
-    });
-  }
+      },
+      scales: {
+        x: {
+          ticks: { color: "#f2f2f2" },
+          grid: { color: "rgba(255, 255, 255, 0.1)" }
+        },
+        y: {
+          ticks: { color: "#f2f2f2" },
+          grid: { color: "rgba(255, 255, 255, 0.1)" }
+        }
+      }
+    }
+  });
+}
+
 
   /* ---------- 공통: 수평 막대 차트 ---------- */
-  function renderHorizontalBar(canvasId, items) {
-    const canvas = document.getElementById(canvasId);
-    if (!canvas) return;
+ function renderHorizontalBar(canvasId, items) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
 
-    const ctx = canvas.getContext("2d");
-    new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: items.map(i => i.name),
-        datasets: [
-          {
-            data: items.map(i => i.value)
-          }
-        ]
+  const ctx = canvas.getContext("2d");
+
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: items.map(i => i.name),
+      datasets: [
+        {
+          data: items.map(i => i.value),
+          backgroundColor: "rgba(177, 211, 196, 0.8)", // 서브컬러 느낌
+          borderRadius: 6
+        }
+      ]
+    },
+    options: {
+      indexAxis: "y",
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          bodyColor: "#ffffff",
+          titleColor: "#ffffff",
+        }
       },
-      options: makeBaseOptions({
-        indexAxis: "y",
-        plugins: {
-          legend: { display: false }
+      scales: {
+        x: {
+          beginAtZero: true,
+          ticks: {
+            color: "#f2f2f2",
+            font: { size: 12 }
+          },
+          grid: {
+            color: "rgba(255,255,255,0.08)"
+          }
         },
-        scales: {
-          x: {
-            beginAtZero: true
+        y: {
+          ticks: {
+            color: "#f2f2f2",
+            font: { size: 13 }
+          },
+          grid: {
+            color: "rgba(255,255,255,0.08)"
           }
         }
-      })
-    });
-  }
+      }
+    }
+  });
+}
+
 
   /* ---------- 유물/콘텐츠 TOP10 차트 ---------- */
   renderHorizontalBar("chartArtifactsClicks", data.topArtifactsByClicks);
