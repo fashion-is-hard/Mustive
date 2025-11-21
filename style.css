@@ -1,4 +1,4 @@
-﻿:root {
+:root {
   --color-main: #f2f2f2;   /* 헤더, 기본 글자 */
   --color-bg: #333f50;     /* 전체 배경 네이비 */
   --color-sub: #b1d3c4;
@@ -201,7 +201,7 @@ header {
 }
 
 .media-card--vertical .media-card-inner {
-  height: 225px; /* 세로 비율 느낌 */
+  height: 225px;
 }
 
 /* 유물용 가로 카드 */
@@ -263,12 +263,12 @@ header {
   font-size: 13px;
   line-height: 1;
   color: transparent;
-  -webkit-text-stroke: 1px #ffffff; /* 테두리 하트 */
+  -webkit-text-stroke: 1px #ffffff;
 }
 
 /* 찜 상태일 때: 면 채워지도록 */
 .heart-btn.liked .heart-shape {
-  color: var(--color-accent);       /* 핑크색 하트 */
+  color: var(--color-accent);
   -webkit-text-stroke: 0;
 }
 
@@ -280,7 +280,7 @@ footer {
   padding: 16px 0 24px;
 }
 
-/* ---------- 반응형 ---------- */
+/* ---------- 반응형 (모바일) ---------- */
 @media (max-width: 768px) {
   .carousel-arrow {
     display: none; /* 모바일에서는 스와이프로 넘기게, 화살표 숨김 */
@@ -290,7 +290,9 @@ footer {
     height: 50vh;
     min-height: 280px;
   }
-  /* ---------- 관리자 대시보드 ---------- */
+}  /* ✅ 이 괄호가 빠져있어서 문제였음 */
+
+/* ---------- 관리자 대시보드 ---------- */
 
 .dashboard-section {
   padding: 40px 0 48px;
@@ -321,7 +323,6 @@ footer {
 }
 
 /* 상단 요약 영역 */
-
 .dashboard-top {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
@@ -355,7 +356,6 @@ footer {
 }
 
 /* 차트 카드 공통 */
-
 .chart-card {
   background: #1f2633;
   border-radius: 14px;
@@ -386,7 +386,6 @@ footer {
 }
 
 /* 중단 차트 2열 그리드 */
-
 .dashboard-row {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -395,13 +394,11 @@ footer {
 }
 
 /* 워드클라우드는 세로 조금 더 넉넉하게 */
-
 .dashboard-row--wordcloud .chart-placeholder,
 .wordcloud-placeholder {
   min-height: 220px;
 }
 
-.wordcloud-placeholder {
 /* ---------- 콘텐츠 상세 페이지: 히어로 ---------- */
 
 .content-hero {
@@ -443,7 +440,7 @@ footer {
   align-items: flex-end;
   justify-content: flex-start;
   padding: 18px 24px;
-  pointer-events: none; /* 필요 시 안쪽에 텍스트만 넣을 용도 */
+  pointer-events: none;
 }
 
 .content-hero-title {
@@ -586,7 +583,10 @@ footer {
     font-size: 1.2rem;
   }
 }
-  .hero-detail-wrapper {
+
+/* ---------- 콘텐츠 상세: MuseTiv 전용 레이아웃 ---------- */
+
+.hero-detail-wrapper {
   height: 40vh;
   min-height: 260px;
 }
@@ -672,7 +672,7 @@ footer {
 .detail-poster {
   width: 100%;
   border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
 }
 
 @media (max-width: 768px) {
@@ -686,7 +686,6 @@ footer {
     width: 140px;
     align-self: center;
   }
-
 }
 
 /* ----- 티빙 바로 시청 버튼 스타일 ----- */
@@ -719,9 +718,3 @@ footer {
   transform: translateY(0);
   box-shadow: 0 3px 8px rgba(0,0,0,0.3);
 }
-
-
-
-
-
-
