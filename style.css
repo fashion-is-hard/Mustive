@@ -722,9 +722,11 @@ footer {
 .wordcloud-placeholder {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;   /* 가운데 모으기 */
+  justify-content: center;   /* 가운데로 모으기 */
   align-items: center;
   text-align: center;
-  gap: 8px 12px;             /* 태그 사이 간격 */
+  gap: 8px 12px;             /* 태그 간 간격 */
   padding: 20px;
 }
+
+
