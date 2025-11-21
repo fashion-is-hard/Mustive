@@ -1,0 +1,590 @@
+﻿:root {
+  --color-main: #f2f2f2;   /* 헤더, 기본 글자 */
+  --color-bg: #333f50;     /* 전체 배경 네이비 */
+  --color-sub: #b1d3c4;
+  --color-accent: #f24c64;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "국립박물관문화재단클래식 Medium", system-ui, sans-serif;
+  background-color: var(--color-bg);
+  color: #ffffff;
+}
+
+/* 헤더 */
+header {
+  background-color: var(--color-main);
+}
+
+.header-inner {
+  margin: 0 auto;
+  padding: 10px 20px;
+  text-align: left;
+}
+
+.logo {
+  width: 150px;
+  height: 25px;
+}
+
+/* ---------- 히어로: 영상 + 페이드 ---------- */
+
+.hero-video {
+  background-color: var(--color-main);
+}
+
+.hero-video-wrapper {
+  position: relative;
+  height: 60vh;
+  min-height: 360px;
+  overflow: hidden;
+}
+
+.hero-video-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+}
+
+/* 위/아래 페이드 오버레이 */
+.hero-gradient {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 25%;
+  pointer-events: none;
+}
+
+.hero-gradient--top {
+  top: 0;
+  background: linear-gradient(
+    to bottom,
+    var(--color-main) 0%,
+    rgba(51, 63, 80, 0) 100%
+  );
+}
+
+.hero-gradient--bottom {
+  bottom: 0;
+  background: linear-gradient(
+    to top,
+    var(--color-main) 0%,
+    rgba(51, 63, 80, 0) 100%
+  );
+}
+
+/* 영상 위에 올라가는 슬로건/로고 */
+.hero-overlay-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #ffffff;
+  padding: 0 16px;
+}
+
+.hero-tagline {
+  font-size: 0.9rem;
+  margin-bottom: 14px;
+  opacity: 0.85;
+}
+
+.hero-logo {
+  max-width: 260px;
+  height: auto;
+}
+
+/* ---------- 공통 캐러셀 섹션 ---------- */
+
+.carousel-section {
+  padding: 32px 0 24px;
+  background-color: var(--color-bg);
+}
+
+.carousel-header {
+  max-width: 1120px;
+  margin: 0 auto 14px;
+  padding: 0 20px;
+}
+
+.carousel-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--color-main);
+}
+
+.carousel-subtitle {
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+/* 캐러셀 껍데기 + 화살표 */
+.carousel-shell {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+}
+
+.carousel-row {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 4px 0 12px;
+}
+
+/* 스크롤바 살짝만 표시 */
+.carousel-row::-webkit-scrollbar {
+  height: 6px;
+}
+.carousel-row::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+.carousel-row::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 70px;
+  border-radius: 999px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.45);
+  color: #ffffff;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.carousel-arrow--left {
+  left: 4px;
+}
+
+.carousel-arrow--right {
+  right: 4px;
+}
+
+.carousel-arrow:hover {
+  background-color: rgba(0, 0, 0, 0.65);
+}
+
+/* ---------- 미디어 카드 공통 ---------- */
+
+.media-card {
+  flex: 0 0 auto;
+}
+
+.media-card-inner {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #222a38;
+}
+
+/* OTT용 세로 카드 */
+.media-card--vertical {
+  width: 150px;
+}
+
+.media-card--vertical .media-card-inner {
+  height: 225px; /* 세로 비율 느낌 */
+}
+
+/* 유물용 가로 카드 */
+.media-card--horizontal {
+  width: 260px;
+}
+
+.media-card--horizontal .media-card-inner {
+  height: 160px;
+}
+
+/* 카드 안 이미지 */
+.media-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 아래 페이드 + 제목 */
+.media-gradient {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 42%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0));
+}
+
+.media-title {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* 하트 버튼 */
+.heart-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  background-color: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* 하트 아이콘: 처음엔 테두리만 보이게 */
+.heart-shape {
+  font-size: 13px;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px #ffffff; /* 테두리 하트 */
+}
+
+/* 찜 상태일 때: 면 채워지도록 */
+.heart-btn.liked .heart-shape {
+  color: var(--color-accent);       /* 핑크색 하트 */
+  -webkit-text-stroke: 0;
+}
+
+/* 푸터 */
+footer {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #d6dce5;
+  padding: 16px 0 24px;
+}
+
+/* ---------- 반응형 ---------- */
+@media (max-width: 768px) {
+  .carousel-arrow {
+    display: none; /* 모바일에서는 스와이프로 넘기게, 화살표 숨김 */
+  }
+
+  .hero-video-wrapper {
+    height: 50vh;
+    min-height: 280px;
+  }
+  /* ---------- 관리자 대시보드 ---------- */
+
+.dashboard-section {
+  padding: 40px 0 48px;
+  background-color: #2a3344;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.dashboard-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.dashboard-header {
+  margin-bottom: 20px;
+}
+
+.dashboard-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-main);
+  margin-bottom: 4px;
+}
+
+.dashboard-subtitle {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* 상단 요약 영역 */
+
+.dashboard-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.stat-card {
+  background: #1f2633;
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+}
+
+.stat-label {
+  font-size: 0.78rem;
+  opacity: 0.7;
+}
+
+.stat-value {
+  display: block;
+  margin-top: 4px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* 차트 카드 공통 */
+
+.chart-card {
+  background: #1f2633;
+  border-radius: 14px;
+  padding: 14px 16px 16px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+}
+
+.chart-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.chart-placeholder {
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: 10px;
+  padding: 10px;
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* canvas가 있을 때 꽉 차게 보이도록 */
+.chart-placeholder canvas {
+  width: 100%;
+  height: 100%;
+}
+
+/* 중단 차트 2열 그리드 */
+
+.dashboard-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+/* 워드클라우드는 세로 조금 더 넉넉하게 */
+
+.dashboard-row--wordcloud .chart-placeholder,
+.wordcloud-placeholder {
+  min-height: 220px;
+}
+
+.wordcloud-placeholder {
+/* ---------- 콘텐츠 상세 페이지: 히어로 ---------- */
+
+.content-hero {
+  background-color: #222a38;
+}
+
+.content-hero-wrapper {
+  position: relative;
+  height: 320px;
+  min-height: 260px;
+  overflow: hidden;
+}
+
+.content-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 아래로 갈수록 어둡게 페이드 아웃 */
+.content-hero-gradient {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 40%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    #333f50 100%
+  );
+}
+
+.content-hero-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 18px 24px;
+  pointer-events: none; /* 필요 시 안쪽에 텍스트만 넣을 용도 */
+}
+
+.content-hero-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+/* ---------- 콘텐츠 정보 레이아웃 ---------- */
+
+.content-info-section {
+  background-color: #333f50;
+  padding: 28px 0 24px;
+}
+
+.content-info-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.content-header {
+  margin-bottom: 16px;
+}
+
+.content-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.content-meta {
+  font-size: 0.85rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.content-badge {
+  padding: 4px 8px;
+  border-radius: 999px;
+  background-color: rgba(0, 0, 0, 0.25);
+  font-size: 0.78rem;
+}
+
+.content-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.1fr);
+  gap: 20px;
+}
+
+.content-section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.content-story {
+  font-size: 0.9rem;
+  opacity: 0.92;
+  margin-bottom: 18px;
+}
+
+/* 태그 pill */
+.content-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag-pill {
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background-color: #1f2633;
+}
+
+/* 우측 정보 카드 */
+.content-side {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-card {
+  background-color: #1f2633;
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.info-card-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.info-list {
+  margin: 0;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 0.8rem;
+  margin-bottom: 4px;
+}
+
+.info-row dt {
+  opacity: 0.75;
+}
+
+.info-row dd {
+  margin: 0;
+  text-align: right;
+}
+
+/* 반응형 조정 */
+@media (max-width: 800px) {
+  .content-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .content-side {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .info-card {
+    flex: 1 1 200px;
+  }
+}
+
+@media (max-width: 600px) {
+  .content-hero-wrapper {
+    height: 240px;
+  }
+
+  .content-title {
+    font-size: 1.2rem;
+  }
+}
+
+}
