@@ -116,232 +116,258 @@
     뮤즈티브와 함께 펼쳐나갈 당신의 세계를 기대합니다
   </footer>
 
-  <script>
-    const TMDB_POSTER_BASE = "https://image.tmdb.org/t/p/w300";
-    const TMDB_BACKDROP_BASE = "https://image.tmdb.org/t/p/w780";
+ <script>
+  const TMDB_POSTER_BASE = "https://image.tmdb.org/t/p/w300";
+  const TMDB_BACKDROP_BASE = "https://image.tmdb.org/t/p/w780";
+  const TMDB_JSON_PATH = "data/musetiv_tving_historical_20_by_title.json"; // 위치에 따라 수정
 
-    function getTitle(item) {
-      return (
-        item.name ||
-        item.title ||
-        item.original_name ||
-        item.original_title ||
-        "제목 미정"
-      );
-    }
+  function getTitle(item) {
+    return (
+      item.name ||
+      item.title ||
+      item.original_name ||
+      item.original_title ||
+      "제목 미정"
+    );
+  }
 
-    // 쿼리 파라미터 파싱
-    function getQueryParams() {
-      const params = {};
-      const search = window.location.search.substring(1);
-      if (!search) return params;
-      search.split("&").forEach(function (pair) {
-        const [k, v] = pair.split("=");
-        if (!k) return;
-        params[decodeURIComponent(k)] = decodeURIComponent(v || "");
-      });
-      return params;
-    }
+  // 쿼리 파라미터 파싱
+  function getQueryParams() {
+    const params = {};
+    const search = window.location.search.substring(1);
+    if (!search) return params;
+    search.split("&").forEach(function (pair) {
+      const [k, v] = pair.split("=");
+      if (!k) return;
+      params[decodeURIComponent(k)] = decodeURIComponent(v || "");
+    });
+    return params;
+  }
 
-    function attachCarouselArrows() {
-      document.querySelectorAll('.carousel-arrow').forEach(function (arrow) {
-        arrow.addEventListener('click', function () {
-          const targetId = arrow.getAttribute('data-target');
-          const row = document.getElementById(targetId);
-          if (!row) return;
+  function attachCarouselArrows() {
+    document.querySelectorAll('.carousel-arrow').forEach(function (arrow) {
+      arrow.addEventListener('click', function () {
+        const targetId = arrow.getAttribute('data-target');
+        const row = document.getElementById(targetId);
+        if (!row) return;
 
-          const direction = arrow.classList.contains('carousel-arrow--left') ? -1 : 1;
-          const scrollAmount = row.clientWidth * 0.8;
+        const direction = arrow.classList.contains('carousel-arrow--left') ? -1 : 1;
+        const scrollAmount = row.clientWidth * 0.8;
 
-          row.scrollBy({
-            left: direction * scrollAmount,
-            behavior: 'smooth'
-          });
+        row.scrollBy({
+          left: direction * scrollAmount,
+          behavior: 'smooth'
         });
       });
+    });
+  }
+
+  // 메인 상세 정보 채우기 + 티빙 버튼 링크 설정
+  function fillDetail(item) {
+    const titleEl = document.getElementById('detail-title');
+    const metaEl = document.getElementById('detail-meta');
+    const overviewEl = document.getElementById('detail-overview');
+    const posterEl = document.getElementById('detail-poster');
+    const tagsEl = document.getElementById('detail-tags');
+    const backdropEl = document.getElementById('detail-backdrop');
+    const watchBtn = document.getElementById('tving-watch-btn');
+
+    const title = getTitle(item);
+    titleEl.textContent = title;
+
+    // 메타 정보
+    const date = item.first_air_date || item.release_date || "";
+    const year = date ? date.slice(0, 4) : "";
+    const rating = typeof item.vote_average === "number"
+      ? item.vote_average.toFixed(1)
+      : "–";
+
+    let genresText = "";
+    if (Array.isArray(item.genres) && item.genres.length > 0) {
+      genresText = item.genres.map(g => g.name).join(", ");
     }
 
-    // 메인 상세 정보 채우기
-    function fillDetail(item) {
-      const titleEl = document.getElementById('detail-title');
-      const metaEl = document.getElementById('detail-meta');
-      const overviewEl = document.getElementById('detail-overview');
-      const posterEl = document.getElementById('detail-poster');
-      const tagsEl = document.getElementById('detail-tags');
-      const backdropEl = document.getElementById('detail-backdrop');
+    metaEl.textContent = [year, genresText, `평점 ${rating}`]
+      .filter(Boolean)
+      .join(" · ");
 
-      const title = getTitle(item);
-      titleEl.textContent = title;
+    overviewEl.textContent = item.overview || "줄거리 정보가 없습니다.";
 
-      // 메타 정보 (연도, 평점, 원제 등)
-      const date = item.first_air_date || item.release_date || "";
-      const year = date ? date.slice(0, 4) : "";
-      const rating = item.vote_average ? item.vote_average.toFixed(1) : "–";
+    // 포스터
+    if (item.poster_path) {
+      posterEl.src = TMDB_POSTER_BASE + item.poster_path;
+    } else {
+      posterEl.src = "img/poster_placeholder.jpg";
+    }
+    posterEl.alt = title;
 
-      let genresText = "";
-      if (Array.isArray(item.genres) && item.genres.length > 0) {
-        genresText = item.genres.map(g => g.name).join(", ");
-      }
-
-      metaEl.textContent = [year, genresText, `평점 ${rating}`]
-        .filter(Boolean)
-        .join(" · ");
-
-      overviewEl.textContent = item.overview || "줄거리 정보가 없습니다.";
-
-      // 포스터
-      if (item.poster_path) {
-        posterEl.src = TMDB_POSTER_BASE + item.poster_path;
-      } else {
-        posterEl.src = "img/poster_placeholder.jpg";
-      }
-      posterEl.alt = title;
-
-      // 태그: 장르 + 원제 등 간단히 뱃지로
-      tagsEl.innerHTML = "";
-      if (genresText) {
-        genresText.split(",").forEach(function (g) {
-          const span = document.createElement('span');
-          span.className = 'tag-chip';
-          span.textContent = g.trim();
-          tagsEl.appendChild(span);
-        });
-      }
-      if (item.original_name || item.original_title) {
+    // 태그
+    tagsEl.innerHTML = "";
+    if (genresText) {
+      genresText.split(",").forEach(function (g) {
         const span = document.createElement('span');
-        span.className = 'tag-chip tag-chip--sub';
-        span.textContent = "원제: " + (item.original_name || item.original_title);
+        span.className = 'tag-chip';
+        span.textContent = g.trim();
         tagsEl.appendChild(span);
-      }
-
-      // 백드롭: 배경 이미지
-      if (item.backdrop_path) {
-        backdropEl.style.backgroundImage = `url(${TMDB_BACKDROP_BASE + item.backdrop_path})`;
-      } else if (item.poster_path) {
-        backdropEl.style.backgroundImage = `url(${TMDB_POSTER_BASE + item.poster_path})`;
-      } else {
-        backdropEl.style.backgroundColor = "#333f50";
-      }
+      });
+    }
+    if (item.original_name || item.original_title) {
+      const span = document.createElement('span');
+      span.className = 'tag-chip tag-chip--sub';
+      span.textContent = "원제: " + (item.original_name || item.original_title);
+      tagsEl.appendChild(span);
     }
 
-    // 추천 콘텐츠 카드 생성 (index와 거의 동일)
-    function createRecoCard(item) {
+    // 백드롭
+    if (item.backdrop_path) {
+      backdropEl.style.backgroundImage = `url(${TMDB_BACKDROP_BASE + item.backdrop_path})`;
+    } else if (item.poster_path) {
+      backdropEl.style.backgroundImage = `url(${TMDB_POSTER_BASE + item.poster_path})`;
+    } else {
+      backdropEl.style.backgroundColor = "#333f50";
+    }
+
+    // ✅ 티빙 바로 시청 버튼 링크 설정
+    if (watchBtn) {
+      const query = encodeURIComponent(title);
+      // 검색 페이지로 보내는 형태 (실제 상영 여부와 무관하게)
+      watchBtn.href = `https://www.tving.com/search?keyword=${query}`;
+    }
+  }
+
+  // 추천 카드 생성
+  function createRecoCard(item) {
+    const article = document.createElement('article');
+    article.className = 'media-card media-card--vertical';
+    if (item.id) article.dataset.tmdbId = item.id;
+    if (item.kind) article.dataset.kind = item.kind;
+
+    const inner = document.createElement('div');
+    inner.className = 'media-card-inner';
+
+    const img = document.createElement('img');
+    img.className = 'media-image';
+    img.alt = getTitle(item);
+    if (item.poster_path) {
+      img.src = TMDB_POSTER_BASE + item.poster_path;
+    } else {
+      img.src = "img/poster_placeholder.jpg";
+    }
+
+    const gradient = document.createElement('div');
+    gradient.className = 'media-gradient';
+
+    const title = document.createElement('div');
+    title.className = 'media-title';
+    title.textContent = getTitle(item);
+
+    inner.appendChild(img);
+    inner.appendChild(gradient);
+    inner.appendChild(title);
+    article.appendChild(inner);
+
+    article.addEventListener('click', function () {
+      const id = item.id;
+      const kind = item.kind || 'tv';
+      if (!id) return;
+      window.location.href =
+        `content.html?id=${encodeURIComponent(id)}&kind=${encodeURIComponent(kind)}`;
+    });
+
+    return article;
+  }
+
+  function renderRecommendations(allItems, currentId) {
+    const row = document.getElementById('detail-reco-row');
+    if (!row) return;
+    row.innerHTML = "";
+
+    const candidates = allItems
+      .filter(it => String(it.id) !== String(currentId))
+      .slice(0, 10);
+
+    candidates.forEach(function (item) {
+      const card = createRecoCard(item);
+      row.appendChild(card);
+    });
+  }
+
+  // 임시 유물 카드 (API 준비되면 교체)
+  function renderDummyArtifacts() {
+    const row = document.getElementById('detail-artifact-row');
+    if (!row) return;
+    row.innerHTML = "";
+
+    for (let i = 1; i <= 5; i++) {
       const article = document.createElement('article');
-      article.className = 'media-card media-card--vertical';
-      if (item.id) article.dataset.tmdbId = item.id;
-      if (item.kind) article.dataset.kind = item.kind;
+      article.className = 'media-card media-card--horizontal';
 
       const inner = document.createElement('div');
       inner.className = 'media-card-inner';
 
       const img = document.createElement('img');
       img.className = 'media-image';
-      img.alt = getTitle(item);
-      if (item.poster_path) {
-        img.src = TMDB_POSTER_BASE + item.poster_path;
-      } else {
-        img.src = "img/poster_placeholder.jpg";
-      }
+      img.alt = '유물 이미지';
+      img.src = 'img/artifact_placeholder.jpg';
 
       const gradient = document.createElement('div');
       gradient.className = 'media-gradient';
 
       const title = document.createElement('div');
       title.className = 'media-title';
-      title.textContent = getTitle(item);
+      title.textContent = '연관 유물 ' + i;
 
       inner.appendChild(img);
       inner.appendChild(gradient);
       inner.appendChild(title);
       article.appendChild(inner);
 
-      // 다시 상세로 이동할 수 있게
-      article.addEventListener('click', function () {
-        const id = item.id;
-        const kind = item.kind || 'tv';
-        if (!id) return;
-        window.location.href = `content.html?id=${encodeURIComponent(id)}&kind=${encodeURIComponent(kind)}`;
+      row.appendChild(article);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    attachCarouselArrows();
+    renderDummyArtifacts();
+
+    const params = getQueryParams();
+    const targetId = params.id ? params.id : null; // 문자열 그대로
+
+    fetch(TMDB_JSON_PATH)
+      .then(function (res) {
+        if (!res.ok) throw new Error('JSON 로딩 실패: ' + res.status);
+        return res.json();
+      })
+      .then(function (items) {
+        console.log("TMDB JSON loaded:", items);
+        if (!Array.isArray(items) || items.length === 0) {
+          throw new Error("JSON 안에 아이템이 없습니다.");
+        }
+
+        // 문자열 기반으로 id 매칭 (숫자/문자 혼합 대비)
+        let current = null;
+        if (targetId !== null) {
+          current = items.find(it => String(it.id) === String(targetId));
+        }
+        if (!current) {
+          console.warn("해당 id를 찾지 못해 첫 번째 작품으로 대체합니다.");
+          current = items[0];
+        }
+
+        fillDetail(current);
+        renderRecommendations(items, current.id);
+      })
+      .catch(function (err) {
+        console.error(err);
+        document.getElementById('detail-overview').textContent =
+          '콘텐츠 정보를 불러오는 데 문제가 발생했습니다.';
       });
-
-      return article;
-    }
-
-    function renderRecommendations(allItems, currentId) {
-      const row = document.getElementById('detail-reco-row');
-      if (!row) return;
-      row.innerHTML = "";
-
-      // 현재 작품 제외, 앞에서 10개 정도만
-      const candidates = allItems.filter(it => it.id !== currentId).slice(0, 10);
-
-      candidates.forEach(function (item) {
-        const card = createRecoCard(item);
-        row.appendChild(card);
-      });
-    }
-
-    // (임시) 관련 유물은 아직 API가 없으니 placeholder 카드 몇 개 만들어두기
-    function renderDummyArtifacts() {
-      const row = document.getElementById('detail-artifact-row');
-      if (!row) return;
-      row.innerHTML = "";
-
-      for (let i = 1; i <= 5; i++) {
-        const article = document.createElement('article');
-        article.className = 'media-card media-card--horizontal';
-
-        const inner = document.createElement('div');
-        inner.className = 'media-card-inner';
-
-        const img = document.createElement('img');
-        img.className = 'media-image';
-        img.alt = '유물 이미지';
-        img.src = 'img/artifact_placeholder.jpg';
-
-        const gradient = document.createElement('div');
-        gradient.className = 'media-gradient';
-
-        const title = document.createElement('div');
-        title.className = 'media-title';
-        title.textContent = '연관 유물 ' + i;
-
-        inner.appendChild(img);
-        inner.appendChild(gradient);
-        inner.appendChild(title);
-        article.appendChild(inner);
-
-        row.appendChild(article);
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-      attachCarouselArrows();
-      renderDummyArtifacts();
-
-      const params = getQueryParams();
-      const targetId = params.id ? Number(params.id) : null;
-
-      // TMDB JSON 로드
-      fetch('data/musetiv_tving_historical_20_by_title.json')
-        .then(function (res) {
-          if (!res.ok) throw new Error('JSON 로딩 실패');
-          return res.json();
-        })
-        .then(function (items) {
-          // id가 숫자형으로 들어있다고 가정
-          const current = items.find(it => Number(it.id) === targetId) || items[0];
-          if (!current) throw new Error('해당 id의 콘텐츠를 찾을 수 없습니다.');
-
-          fillDetail(current);
-          renderRecommendations(items, current.id);
-        })
-        .catch(function (err) {
-          console.error(err);
-          document.getElementById('detail-overview').textContent =
-            '콘텐츠 정보를 불러오는 데 문제가 발생했습니다.';
-        });
-    });
-  </script>
+  });
+</script>
 </body>
 </html>
+
+</body>
+</html>
+
 
