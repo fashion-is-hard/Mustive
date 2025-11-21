@@ -183,6 +183,90 @@
   <footer>
     뮤즈티브와 함께 펼쳐나갈 당신의 세계를 기대합니다
   </footer>
+<!-- 관리자 대시보드 섹션 -->
+<section class="dashboard-section">
+  <div class="dashboard-inner">
+    <div class="dashboard-header">
+      <h2 class="dashboard-title">뮤즈티브 이용 현황 대시보드</h2>
+      <p class="dashboard-subtitle">
+        프로토타입 기준 가상 데이터입니다. 실제 서비스 런칭 시 로그 데이터와 연계될 예정입니다.
+      </p>
+    </div>
+
+    <!-- 상단 요약 + 방문자 분포 -->
+    <div class="dashboard-top">
+      <!-- 요약 카드 -->
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-label">총 방문자 수</div>
+          <span class="stat-value" id="stat-totalVisitors">–</span>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">총 세션 수</div>
+          <span class="stat-value" id="stat-totalSessions">–</span>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">평균 체류 시간(분)</div>
+          <span class="stat-value" id="stat-avgSessionDuration">–</span>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">1인당 열람 유물/콘텐츠</div>
+          <span class="stat-value" id="stat-avgItemsPerUser">–</span>
+        </div>
+      </div>
+
+      <!-- 성별/연령 차트 -->
+      <div class="chart-card">
+        <div class="chart-title">방문자 성별·연령 분포</div>
+        <div class="chart-placeholder">
+          <canvas id="chartVisitors"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- 유물 TOP10 -->
+    <div class="dashboard-row">
+      <div class="chart-card">
+        <div class="chart-title">유물 클릭 TOP10</div>
+        <div class="chart-placeholder">
+          <canvas id="chartArtifactsClicks"></canvas>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">유물 찜 TOP10</div>
+        <div class="chart-placeholder">
+          <canvas id="chartArtifactsLikes"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- 콘텐츠 TOP10 -->
+    <div class="dashboard-row">
+      <div class="chart-card">
+        <div class="chart-title">콘텐츠 클릭 TOP10</div>
+        <div class="chart-placeholder">
+          <canvas id="chartContentsClicks"></canvas>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">콘텐츠 찜 TOP10</div>
+        <div class="chart-placeholder">
+          <canvas id="chartContentsLikes"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- 키워드 워드클라우드 -->
+    <div class="dashboard-row dashboard-row--wordcloud">
+      <div class="chart-card">
+        <div class="chart-title">관심 키워드 워드클라우드</div>
+        <div class="chart-placeholder wordcloud-placeholder" id="keyword-cloud">
+          <!-- JS로 태그 span 생성 -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
   <!-- 간단한 인터랙션 스크립트 -->
   <script>
@@ -358,6 +442,7 @@
 
 </body>
 </html>
+
 
 
 
