@@ -133,8 +133,24 @@ document.addEventListener("DOMContentLoaded", function () {
       const fontSize = 0.7 + ratio * 1.1; // 0.7rem ~ 1.8rem 정도
 
       span.textContent = k.tag;
-      span.style.fontSize = fontSize.toFixed(2) + "rem";
-      span.style.margin = "4px 8px";
+     const maxWeight = Math.max(...data.keywordWeights.map(k => k.weight));
+
+data.keywordWeights.forEach(k => {
+  const span = document.createElement("span");
+  const ratio = k.weight / maxWeight;
+
+  // 글씨 크기 범위 (0.9rem ~ 1.8rem)
+  const fontSize = 0.9 + ratio * 0.9;
+
+  span.textContent = k.tag;
+  span.style.fontSize = fontSize.toFixed(2) + "rem";
+  span.style.opacity = (0.65 + ratio * 0.35).toFixed(2);
+  span.style.padding = "2px 6px";
+  span.style.whiteSpace = "nowrap";    // 단어 자체는 줄바꿈 X
+
+  cloudContainer.appendChild(span);
+});
+
       span.style.opacity = (0.6 + ratio * 0.4).toFixed(2);
 
       cloudContainer.appendChild(span);
