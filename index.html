@@ -253,64 +253,71 @@
       );
     }
 
-    function createOttCard(item) {
-      const article = document.createElement('article');
-      article.className = 'media-card media-card--vertical';
-      // 나중에 상세페이지 연결할 때 쓰라고 data-id, data-kind 저장
-      if (item.id) {
-        article.dataset.tmdbId = item.id;
-      }
-      if (item.kind) {
-        article.dataset.kind = item.kind; // "tv" or "movie"
-      }
+   function createOttCard(item) {
+  const article = document.createElement('article');
+  article.className = 'media-card media-card--vertical';
 
-      const inner = document.createElement('div');
-      inner.className = 'media-card-inner';
+  // 나중에 상세페이지에서 쓸 메타데이터
+  if (item.id) article.dataset.tmdbId = item.id;
+  if (item.kind) {
+    article.dataset.kind = item.kind; // tv / movie
+  } else {
+    // JSON에 kind가 없다면 우선 tv로 가정
+    article.dataset.kind = 'tv';
+  }
 
-      const img = document.createElement('img');
-      img.className = 'media-image';
-      img.alt = getTitle(item);
+  const inner = document.createElement('div');
+  inner.className = 'media-card-inner';
 
-      if (item.poster_path) {
-        img.src = TMDB_POSTER_BASE + item.poster_path;
-      } else {
-        // 포스터 없을 때를 위한 기본 이미지 (원하면 직접 추가)
-        img.src = "img/poster_placeholder.jpg";
-      }
+  const img = document.createElement('img');
+  img.className = 'media-image';
+  img.alt = getTitle(item);
 
-      const heartBtn = document.createElement('button');
-      heartBtn.type = 'button';
-      heartBtn.className = 'heart-btn';
-      heartBtn.setAttribute('aria-label', '콘텐츠 찜하기');
+  if (item.poster_path) {
+    img.src = TMDB_POSTER_BASE + item.poster_path;
+  } else {
+    img.src = "img/poster_placeholder.jpg";
+  }
 
-      const heartSpan = document.createElement('span');
-      heartSpan.className = 'heart-shape';
-      heartSpan.textContent = '♥';
-      heartBtn.appendChild(heartSpan);
+  const heartBtn = document.createElement('button');
+  heartBtn.type = 'button';
+  heartBtn.className = 'heart-btn';
+  heartBtn.setAttribute('aria-label', '콘텐츠 찜하기');
 
-      const gradient = document.createElement('div');
-      gradient.className = 'media-gradient';
+  const heartSpan = document.createElement('span');
+  heartSpan.className = 'heart-shape';
+  heartSpan.textContent = '♥';
+  heartBtn.appendChild(heartSpan);
 
-      const title = document.createElement('div');
-      title.className = 'media-title';
-      title.textContent = getTitle(item);
+  const gradient = document.createElement('div');
+  gradient.className = 'media-gradient';
 
-      inner.appendChild(img);
-      inner.appendChild(heartBtn);
-      inner.appendChild(gradient);
-      inner.appendChild(title);
+  const title = document.createElement('div');
+  title.className = 'media-title';
+  title.textContent = getTitle(item);
 
-      article.appendChild(inner);
+  inner.appendChild(img);
+  inner.appendChild(heartBtn);
+  inner.appendChild(gradient);
+  inner.appendChild(title);
+  article.appendChild(inner);
 
-      // 나중에 카드 클릭 시 content.html로 이동하고 싶다면:
-      // article.addEventListener('click', function () {
-      //   const id = article.dataset.tmdbId;
-      //   const kind = article.dataset.kind || 'tv';
-      //   window.location.href = `content.html?kind=${kind}&id=${id}`;
-      // });
+  // ✅ 카드 클릭 시 content.html로 이동
+  article.addEventListener('click', function (e) {
+    // 하트 버튼 눌렀을 때는 이동하지 않도록 예외 처리
+    if (e.target.closest('.heart-btn')) return;
 
-      return article;
-    }
+    const id = article.dataset.tmdbId;
+    const kind = article.dataset.kind || 'tv';
+    if (!id) return;
+
+    // 쿼리 파라미터로 id, kind 전달
+    window.location.href = `content.html?id=${encodeURIComponent(id)}&kind=${encodeURIComponent(kind)}`;
+  });
+
+  return article;
+}
+
 
     // JSON을 불러와서 OTT 캐러셀에 렌더링
     function renderOttFromJson() {
@@ -351,5 +358,6 @@
 
 </body>
 </html>
+
 
 
