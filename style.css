@@ -718,3 +718,13 @@ footer {
   transform: translateY(0);
   box-shadow: 0 3px 8px rgba(0,0,0,0.3);
 }
+
+.wordcloud-placeholder {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;   /* 가운데 모으기 */
+  align-items: center;
+  text-align: center;
+  gap: 8px 12px;             /* 태그 사이 간격 */
+  padding: 20px;
+}
