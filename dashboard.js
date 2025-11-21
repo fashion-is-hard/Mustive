@@ -1,5 +1,8 @@
 // dashboard.js
 // museDashboardData (dashboard-data.js에서 정의) 를 사용해 차트/요약/워드클라우드를 렌더링
+// Chart.js 글자색 전역 설정 (가장 강력한 방식)
+Chart.defaults.color = "#f2f2f2";
+Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, system-ui, sans-serif";
 
 document.addEventListener("DOMContentLoaded", function () {
   if (typeof museDashboardData === "undefined") {
