@@ -1,0 +1,660 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>뮤즈티브</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <img class="logo" src="logo1.png" alt="뮤즈티브 로고">
+    </div>
+  </header>
+
+  <main>
+    <!-- 히어로: 영상 + 위/아래 페이드 -->
+    <section class="hero-video">
+      <div class="hero-video-wrapper">
+        <video
+          src="hero_vid.mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+        ></video>
+
+        <!-- 위/아래 페이드 오버레이 -->
+        <div class="hero-gradient hero-gradient--top"></div>
+        <div class="hero-gradient hero-gradient--bottom"></div>
+
+        <!-- 영상 위 로고/슬로건 -->
+        <div class="hero-overlay-content">
+          <p class="hero-tagline">내가 보는 장면에서, 내가 만날 역사까지.</p>
+          <img class="hero-logo" src="logo2.png" alt="뮤즈티브 로고">
+        </div>
+      </div>
+    </section>
+
+    <!-- OTT 콘텐츠 캐러셀 -->
+    <section class="carousel-section ott-section">
+      <div class="carousel-header">
+        <h2 class="carousel-title">티빙에서 보고 있는 콘텐츠</h2>
+        <p class="carousel-subtitle">
+          지금 내가 즐겨보는 콘텐츠에서, 연결될 수 있는 유물을 발견해보세요.
+        </p>
+      </div>
+
+      <div class="carousel-shell">
+        <button class="carousel-arrow carousel-arrow--left" data-target="ott-row" aria-label="이전 콘텐츠">
+          &#10094;
+        </button>
+
+        <div class="carousel-row" id="ott-row">
+          <!-- 필요한 만큼 카드 복제해서 20개 이상 사용하면 됨 -->
+          <article class="media-card media-card--vertical">
+            <div class="media-card-inner">
+              <img src="img/poster1.jpg" alt="콘텐츠 1" class="media-image">
+              <button class="heart-btn" type="button" aria-label="콘텐츠 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">콘텐츠 제목 1</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--vertical">
+            <div class="media-card-inner">
+              <img src="img/poster2.jpg" alt="콘텐츠 2" class="media-image">
+              <button class="heart-btn" type="button" aria-label="콘텐츠 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">콘텐츠 제목 2</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--vertical">
+            <div class="media-card-inner">
+              <img src="img/poster3.jpg" alt="콘텐츠 3" class="media-image">
+              <button class="heart-btn" type="button" aria-label="콘텐츠 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">콘텐츠 제목 3</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--vertical">
+            <div class="media-card-inner">
+              <img src="img/poster4.jpg" alt="콘텐츠 4" class="media-image">
+              <button class="heart-btn" type="button" aria-label="콘텐츠 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">콘텐츠 제목 4</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--vertical">
+            <div class="media-card-inner">
+              <img src="img/poster5.jpg" alt="콘텐츠 5" class="media-image">
+              <button class="heart-btn" type="button" aria-label="콘텐츠 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">콘텐츠 제목 5</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--vertical">
+            <div class="media-card-inner">
+              <img src="img/poster6.jpg" alt="콘텐츠 6" class="media-image">
+              <button class="heart-btn" type="button" aria-label="콘텐츠 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">콘텐츠 제목 6</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--vertical">
+            <div class="media-card-inner">
+              <img src="img/poster7.jpg" alt="콘텐츠 7" class="media-image">
+              <button class="heart-btn" type="button" aria-label="콘텐츠 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">콘텐츠 제목 7</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--vertical">
+            <div class="media-card-inner">
+              <img src="img/poster8.jpg" alt="콘텐츠 8" class="media-image">
+              <button class="heart-btn" type="button" aria-label="콘텐츠 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">콘텐츠 제목 8</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--vertical">
+            <div class="media-card-inner">
+              <img src="img/poster9.jpg" alt="콘텐츠 9" class="media-image">
+              <button class="heart-btn" type="button" aria-label="콘텐츠 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">콘텐츠 제목 9</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--vertical">
+            <div class="media-card-inner">
+              <img src="img/poster10.jpg" alt="콘텐츠 10" class="media-image">
+              <button class="heart-btn" type="button" aria-label="콘텐츠 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">콘텐츠 제목 10</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--vertical">
+            <div class="media-card-inner">
+              <img src="img/poster11.jpg" alt="콘텐츠 11" class="media-image">
+              <button class="heart-btn" type="button" aria-label="콘텐츠 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">콘텐츠 제목 11</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--vertical">
+            <div class="media-card-inner">
+              <img src="img/poster12.jpg" alt="콘텐츠 12" class="media-image">
+              <button class="heart-btn" type="button" aria-label="콘텐츠 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">콘텐츠 제목 12</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--vertical">
+            <div class="media-card-inner">
+              <img src="img/poster13.jpg" alt="콘텐츠 13" class="media-image">
+              <button class="heart-btn" type="button" aria-label="콘텐츠 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">콘텐츠 제목 13</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--vertical">
+            <div class="media-card-inner">
+              <img src="img/poster14.jpg" alt="콘텐츠 14" class="media-image">
+              <button class="heart-btn" type="button" aria-label="콘텐츠 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">콘텐츠 제목 14</div>
+            </div>
+          </article>
+
+
+          <article class="media-card media-card--vertical">
+            <div class="media-card-inner">
+              <img src="img/poster15.jpg" alt="콘텐츠 15" class="media-image">
+              <button class="heart-btn" type="button" aria-label="콘텐츠 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">콘텐츠 제목 15</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--vertical">
+            <div class="media-card-inner">
+              <img src="img/poster16.jpg" alt="콘텐츠 16" class="media-image">
+              <button class="heart-btn" type="button" aria-label="콘텐츠 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">콘텐츠 제목 16</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--vertical">
+            <div class="media-card-inner">
+              <img src="img/poster17.jpg" alt="콘텐츠 17" class="media-image">
+              <button class="heart-btn" type="button" aria-label="콘텐츠 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">콘텐츠 제목 17</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--vertical">
+            <div class="media-card-inner">
+              <img src="img/poster18.jpg" alt="콘텐츠 18" class="media-image">
+              <button class="heart-btn" type="button" aria-label="콘텐츠 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">콘텐츠 제목 18</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--vertical">
+            <div class="media-card-inner">
+              <img src="img/poster19.jpg" alt="콘텐츠 19" class="media-image">
+              <button class="heart-btn" type="button" aria-label="콘텐츠 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">콘텐츠 제목 19</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--vertical">
+            <div class="media-card-inner">
+              <img src="img/poster20.jpg" alt="콘텐츠 20" class="media-image">
+              <button class="heart-btn" type="button" aria-label="콘텐츠 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">콘텐츠 제목 20</div>
+            </div>
+          </article>
+
+
+          <!-- ... 여기에 같은 형식으로 20개 정도 카드 추가 ... -->
+        </div>
+
+        <button class="carousel-arrow carousel-arrow--right" data-target="ott-row" aria-label="다음 콘텐츠">
+          &#10095;
+        </button>
+      </div>
+    </section>
+
+    <!-- 유물 카드 캐러셀 -->
+    <section class="carousel-section artifact-section">
+      <div class="carousel-header">
+        <h2 class="carousel-title">유물로 확장되는 나의 세계</h2>
+        <p class="carousel-subtitle">
+          콘텐츠 속 장면과 연결된 국립중앙박물관의 유물을 살펴보세요.
+        </p>
+      </div>
+
+      <div class="carousel-shell">
+        <button class="carousel-arrow carousel-arrow--left" data-target="artifact-row" aria-label="이전 유물">
+          &#10094;
+        </button>
+
+        <div class="carousel-row" id="artifact-row">
+          <article class="media-card media-card--horizontal">
+            <div class="media-card-inner">
+              <img src="img/artifact1.jpg" alt="유물 1" class="media-image">
+              <button class="heart-btn" type="button" aria-label="유물 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">유물 이름 1</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--horizontal">
+            <div class="media-card-inner">
+              <img src="img/artifact2.jpg" alt="유물 2" class="media-image">
+              <button class="heart-btn" type="button" aria-label="유물 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">유물 이름 2</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--horizontal">
+            <div class="media-card-inner">
+              <img src="img/artifact3.jpg" alt="유물 3" class="media-image">
+              <button class="heart-btn" type="button" aria-label="유물 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">유물 이름 3</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--horizontal">
+            <div class="media-card-inner">
+              <img src="img/artifact4.jpg" alt="유물 4" class="media-image">
+              <button class="heart-btn" type="button" aria-label="유물 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">유물 이름 4</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--horizontal">
+            <div class="media-card-inner">
+              <img src="img/artifact5.jpg" alt="유물 5" class="media-image">
+              <button class="heart-btn" type="button" aria-label="유물 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">유물 이름 5</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--horizontal">
+            <div class="media-card-inner">
+              <img src="img/artifact6.jpg" alt="유물 6" class="media-image">
+              <button class="heart-btn" type="button" aria-label="유물 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">유물 이름 6</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--horizontal">
+            <div class="media-card-inner">
+              <img src="img/artifact7.jpg" alt="유물 7" class="media-image">
+              <button class="heart-btn" type="button" aria-label="유물 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">유물 이름 7</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--horizontal">
+            <div class="media-card-inner">
+              <img src="img/artifact8.jpg" alt="유물 8" class="media-image">
+              <button class="heart-btn" type="button" aria-label="유물 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">유물 이름 8</div>
+            </div>
+          </article>
+
+
+          <article class="media-card media-card--horizontal">
+            <div class="media-card-inner">
+              <img src="img/artifact9.jpg" alt="유물 9" class="media-image">
+              <button class="heart-btn" type="button" aria-label="유물 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">유물 이름 9</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--horizontal">
+            <div class="media-card-inner">
+              <img src="img/artifact10.jpg" alt="유물 10" class="media-image">
+              <button class="heart-btn" type="button" aria-label="유물 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">유물 이름 10</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--horizontal">
+            <div class="media-card-inner">
+              <img src="img/artifact11.jpg" alt="유물 11" class="media-image">
+              <button class="heart-btn" type="button" aria-label="유물 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">유물 이름 11</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--horizontal">
+            <div class="media-card-inner">
+              <img src="img/artifact12.jpg" alt="유물 12" class="media-image">
+              <button class="heart-btn" type="button" aria-label="유물 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">유물 이름 12</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--horizontal">
+            <div class="media-card-inner">
+              <img src="img/artifact13.jpg" alt="유물 13" class="media-image">
+              <button class="heart-btn" type="button" aria-label="유물 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">유물 이름 13</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--horizontal">
+            <div class="media-card-inner">
+              <img src="img/artifact14.jpg" alt="유물 14" class="media-image">
+              <button class="heart-btn" type="button" aria-label="유물 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">유물 이름 14</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--horizontal">
+            <div class="media-card-inner">
+              <img src="img/artifact15.jpg" alt="유물 15" class="media-image">
+              <button class="heart-btn" type="button" aria-label="유물 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">유물 이름 15</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--horizontal">
+            <div class="media-card-inner">
+              <img src="img/artifact16.jpg" alt="유물 16" class="media-image">
+              <button class="heart-btn" type="button" aria-label="유물 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">유물 이름 16</div>
+            </div>
+          </article>
+
+
+          <article class="media-card media-card--horizontal">
+            <div class="media-card-inner">
+              <img src="img/artifact17.jpg" alt="유물 17" class="media-image">
+              <button class="heart-btn" type="button" aria-label="유물 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">유물 이름 17</div>
+            </div>
+          </article>
+
+
+          <article class="media-card media-card--horizontal">
+            <div class="media-card-inner">
+              <img src="img/artifact18.jpg" alt="유물 18" class="media-image">
+              <button class="heart-btn" type="button" aria-label="유물 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">유물 이름 18</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--horizontal">
+            <div class="media-card-inner">
+              <img src="img/artifact19.jpg" alt="유물 19" class="media-image">
+              <button class="heart-btn" type="button" aria-label="유물 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">유물 이름 19</div>
+            </div>
+          </article>
+
+          <article class="media-card media-card--horizontal">
+            <div class="media-card-inner">
+              <img src="img/artifact20.jpg" alt="유물 20" class="media-image">
+              <button class="heart-btn" type="button" aria-label="유물 찜하기">
+                <span class="heart-shape">♥</span>
+              </button>
+              <div class="media-gradient"></div>
+              <div class="media-title">유물 이름 20</div>
+            </div>
+          </article>
+
+          <!-- ... 여기도 같은 형식으로 카드 여러 개 추가 ... -->
+        </div>
+
+        <button class="carousel-arrow carousel-arrow--right" data-target="artifact-row" aria-label="다음 유물">
+          &#10095;
+        </button>
+      </div>
+    </section>
+        <!-- 관리자 대시보드 섹션 -->
+    <section class="dashboard-section" id="admin-dashboard">
+      <div class="dashboard-inner">
+        <header class="dashboard-header">
+          <h2 class="dashboard-title">관리자 대시보드</h2>
+          <p class="dashboard-subtitle">
+            방문 통계와 유물·콘텐츠 반응을 한 눈에 확인할 수 있는 영역입니다.
+          </p>
+        </header>
+
+        <!-- 상단: 방문자/성별/연령 요약 -->
+        <div class="dashboard-top">
+          <div class="stat-grid">
+            <div class="stat-card">
+              <span class="stat-label">총 방문자</span>
+              <span class="stat-value" id="stat-total-visitors">0</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">오늘 방문자</span>
+              <span class="stat-value" id="stat-today-visitors">0</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">총 찜 수</span>
+              <span class="stat-value" id="stat-total-likes">0</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">총 클릭 수</span>
+              <span class="stat-value" id="stat-total-clicks">0</span>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <h3 class="chart-title">성별 · 연령별 비율</h3>
+            <!-- 나중에 라이브러리(Chart.js 등)로 그릴 캔버스 -->
+            <div class="chart-placeholder">
+              <canvas id="chart-demographics"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- 중단: 유물 TOP10 -->
+        <div class="dashboard-row">
+          <div class="chart-card">
+            <h3 class="chart-title">가장 많이 클릭된 유물 TOP 10</h3>
+            <div class="chart-placeholder">
+              <canvas id="chart-artifact-clicks"></canvas>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <h3 class="chart-title">하트가 가장 많이 눌린 유물 TOP 10</h3>
+            <div class="chart-placeholder">
+              <canvas id="chart-artifact-likes"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- 중단: 콘텐츠 TOP10 -->
+        <div class="dashboard-row">
+          <div class="chart-card">
+            <h3 class="chart-title">가장 많이 클릭된 콘텐츠 TOP 10</h3>
+            <div class="chart-placeholder">
+              <canvas id="chart-content-clicks"></canvas>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <h3 class="chart-title">하트가 가장 많이 눌린 콘텐츠 TOP 10</h3>
+            <div class="chart-placeholder">
+              <canvas id="chart-content-likes"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- 하단: 태그/키워드 워드클라우드 -->
+        <div class="dashboard-row dashboard-row--wordcloud">
+          <div class="chart-card">
+            <h3 class="chart-title">유물 태그 워드클라우드</h3>
+            <div class="wordcloud-placeholder" id="wordcloud-artifacts">
+              <!-- 여기 안을 나중에 워드클라우드 라이브러리로 렌더링 -->
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <h3 class="chart-title">콘텐츠 키워드 워드클라우드</h3>
+            <div class="wordcloud-placeholder" id="wordcloud-contents">
+              <!-- 여기 안을 나중에 워드클라우드 라이브러리로 렌더링 -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    뮤즈티브와 함께 펼쳐나갈 당신의 세계를 기대합니다
+  </footer>
+
+  <!-- 간단한 인터랙션 스크립트 -->
+  <script>
+    // 하트 토글
+    document.querySelectorAll('.heart-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        btn.classList.toggle('liked');
+      });
+    });
+
+    // 캐러셀 화살표 스크롤
+    document.querySelectorAll('.carousel-arrow').forEach(function (arrow) {
+      arrow.addEventListener('click', function () {
+        const targetId = arrow.getAttribute('data-target');
+        const row = document.getElementById(targetId);
+        if (!row) return;
+
+        const direction = arrow.classList.contains('carousel-arrow--left') ? -1 : 1;
+        const scrollAmount = row.clientWidth * 0.8;
+
+        row.scrollBy({
+          left: direction * scrollAmount,
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>
